@@ -1,0 +1,65 @@
+# Call Forwarding
+
+description: Call Forwarding with Recording
+
+variables:
+  # The 'number' variable is the target number to forward the call to
+  $target: "+15559820800"
+  # The 'URL' we push the data to
+  $url: https://d79f-195-68-88-26.ngrok-free.app
+
+defaults:
+  # Do not automatically answer incoming calls
+  # This is a transparent call forwarding
+  autoAnswer: false
+
+branches:
+  # The 'inbound-call' branch defines actions for incoming calls
+  inbound-call:
+    actions:
+      - action: dial@v1
+        params:
+          answerOnBranch: answered
+          targets:
+            - number: ${{ $target }}
+              timeout: 20
+
+  hangup:
+    actions:
+      - action: fetch@v1
+        params:
+          url: ${{ $url }}/metadata
+          method: POST
+          headers:
+            Content-Type: application/json
+            CustomHeader: CustomValue # Authorization?
+          body: |
+            {
+              "app": ${{ JSON.stringify(app) }},
+              "run": ${{ JSON.stringify(run) }},
+              "call": ${{ JSON.stringify(call) }}
+            }
+
+  answered:
+    actions:
+      - action: startRecording@v1
+        params:
+          transcription:
+            language: en-US
+        events:
+          ready:
+            - action: fetch@v1
+              params:
+                url: ${{ $url }}/data
+                method: POST
+                headers:
+                  CustomHeader: CustomValue # Authorization?
+                  Content-Type: application/json
+                body: |
+                  {
+                    "app": ${{ JSON.stringify(app) }},
+                    "run": ${{ JSON.stringify(run) }},
+                    "call": ${{ JSON.stringify(call) }},
+                    "recording": ${{ JSON.stringify(recording) }}
+                  }
+      - action: bridge@v1

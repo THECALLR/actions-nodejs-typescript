@@ -1,0 +1,25 @@
+{
+  "name": "actions-nodejs-typescript",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "rm -fr dist/* && tsc",
+    "ping": "node dist/ping.js",
+    "list-scenarios": "node dist/list-scenarios.js",
+    "list-numbers": "node dist/list-numbers.js",
+    "create-scenario-target": "node dist/create-scenario-target.js",
+    "delete-scenario": "node dist/delete-scenario.js",
+    "buy-number": "node dist/buy-number.js",
+    "remove-number": "node dist/remove-number.js",
+    "attach-number-to-scenario": "node dist/attach-number-to-scenario.js"
+  },
+  "devDependencies": {
+    "@tsconfig/node22": "^22.0.0",
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "yaml": "^2.6.1"
+  }
+}
