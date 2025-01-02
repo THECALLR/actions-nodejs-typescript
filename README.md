@@ -13,9 +13,11 @@ We receive the call metadata (CDR) and data (audio recording + insights) via an 
 - [Pre-requisites](#pre-requisites)
 - [Installation](#installation)
 - [Usage](#usage)
+  - [Run ngrok locally](#run-ngrok-locally)
   - [Create a new scenario (call forwarding with recording enabled)](#create-a-new-scenario-call-forwarding-with-recording-enabled)
-  - [Buy a new phone number](#buy-a-new-phone-number)
-  - [Attach the new number to the previously created scenario](#attach-the-new-number-to-the-previously-created-scenario)
+  - [Buy a new phone number (production accounts only)](#buy-a-new-phone-number-production-accounts-only)
+  - [Attach the new number to the previously created scenario (production accounts only)](#attach-the-new-number-to-the-previously-created-scenario-production-accounts-only)
+  - [Receive call data and metadata](#receive-call-data-and-metadata)
   - [List your current numbers](#list-your-current-numbers)
   - [List your scenarios](#list-your-scenarios)
   - [Delete a scenario](#delete-a-scenario)
@@ -64,7 +66,7 @@ PING OK, timestamp: 1735562976
 
 ### Run ngrok locally
 
-We will use ngrok to create a tunnel to our local server, so that Callr can send us the call data.
+We will use [ngrok](https://download.ngrok.com/) to create a tunnel to our local server, so that Callr can send us the call data.
 
 ```shell
 ngrok http 3030
