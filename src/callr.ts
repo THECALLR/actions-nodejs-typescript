@@ -227,9 +227,11 @@ export async function Request<T>(
       body: new JsonRpcRequest(method, params, id).json(),
     };
 
+    const url = process.env.CALLR_API_URL ?? apiUrl;
+
     let response: Response;
     try {
-      response = await fetch(apiUrl, requestOptions);
+      response = await fetch(url, requestOptions);
     } catch (e) {
       throw new ApiHttpException((e as Error).message, 0);
     }

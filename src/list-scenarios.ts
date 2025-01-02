@@ -1,13 +1,13 @@
 import "dotenv/config";
 
-import callr, { App, SearchResult } from "./callr.js";
+import CallrApi, { App, SearchResult } from "./callr.js";
 
 if (process.env.CALLR_API_KEY === undefined) {
   console.error("Missing CALLR_API_KEY environment variable");
   process.exit(1);
 }
 
-const callrApi = new callr(process.env.CALLR_API_KEY);
+const callrApi = new CallrApi(process.env.CALLR_API_KEY);
 
 try {
   const result = await callrApi.Request<SearchResult<App>>("apps.search", [

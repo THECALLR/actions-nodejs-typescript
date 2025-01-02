@@ -1,5 +1,5 @@
 import "dotenv/config";
-import callr from "./callr.js";
+import CallrApi from "./callr.js";
 
 if (process.env.CALLR_API_KEY === undefined) {
   console.error("Missing CALLR_API_KEY environment variable");
@@ -12,7 +12,7 @@ if (process.argv.length < 3) {
 }
 
 const id = process.argv[2];
-const callrApi = new callr(process.env.CALLR_API_KEY);
+const callrApi = new CallrApi(process.env.CALLR_API_KEY);
 
 try {
   await callrApi.Request("apps.delete", [id]);
